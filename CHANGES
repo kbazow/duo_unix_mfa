@@ -1,0 +1,234 @@
+duo_unix-1.11.5:
+- Added support for Debian 11
+- Removed support for Debian 8
+- Removed support for CentOS 6
+- Fixed MOTD display for non-interactive sessions
+- The support tool now also collects the sudo PAM configuration file
+- Updated pinned certificates
+
+duo_unix-1.11.4:
+- Added support for Ubuntu 20.04
+- Added support tool to collect information (e.g. logs and PAM stacks) for debugging purposes
+
+duo_unix-1.11.3:
+- Added support for RedHat 8, CentOS 8, and Debian 10
+- Improved validation of BSON messages
+
+duo_unix-1.11.2:
+- Added recommended Kerberos configuration for Duo Unix to our documentation, found at https://help.duo.com/s/article/5085. Thanks to Neal Poole at Facebook for bringing expertise and attention to this topic.
+- Updated SELinux policy to allow local logins to use the pam_duo PAM module and made sshd configurable
+- Added support for spaces in group names when escaped with backslashes in pam_duo.conf and login_duo.conf
+- Test infrastructure updates
+
+duo_unix-1.11.1:
+- Fixed bug causing console login to fail on certain systems
+
+duo_unix-1.11.0:
+
+- Added support for GECOS field parsing based on user-supplied delimiter
+- Updated README to include development/testing steps
+- Minor test infrastructure updates
+
+duo_unix-1.10.5:
+
+- Fixed an accidental null pointer free on systems where getaddrinfo() is unsuccessful
+
+duo_unix-1.10.4:
+
+- Removed failmode decision from auth endpoint and moved it to only preauth according to standards in our other integrations
+- Updated Duo Unix to speak up to TLS 1.2
+- Support for LibreSSL 2.7.0 and up
+- Minor memory leak fixes
+- Output message when user is locked out
+
+duo_unix-1.10.3:
+
+- Added support for http_proxy with SELinux enabled
+
+duo_unix-1.10.2:
+
+- Added default failmode values in config files
+
+duo_unix-1.10.1:
+
+- Fixed bug causing automated tests to fail on OSX
+- Addressed an issue which kept configuration secrets in memory for longer than necessary
+
+duo_unix-1.10.0:
+
+- Added LibreSSL support
+- Added additional GECOS parsing support
+- Increased OSX group count
+
+duo_unix-1.9.21:
+
+- PSA-2017-002: Only allow http_proxy to be defined in configuration file instead of environment
+
+duo_unix-1.9.20:
+
+- Fix installation on AIX systems
+- Add support for using OpenSSL 1.1.0
+- Link libduo statically to address issues with the ldconfig cache and incompatibilities between versions
+- Fixed a bug that produced incorrect SNI when using a proxy
+
+duo_unix-1.9.19:
+
+- Restore the http_proxy environment variable after Duo is done
+- Added https_timeout config option to pam_duo
+- Handles missing shell and adds default if not specified in getpwuid
+- Add SNI support and a guard for systems that don't support SNI
+- Bug fixes for timeouts and fallback ip addresses
+
+duo_unix-1.9.18:
+
+- Added HTTP proxy connection error handling
+- Improved compatibility with Solaris and AIX
+
+duo_unix-1.9.17:
+
+- Fixed PAM return code issue
+
+duo_unix-1.9.16:
+
+- Test fixes
+- Compilation fixes
+
+duo_unix-1.9.15:
+
+- SELinux policy module package support
+- PAM module improvements
+- Removed deprecated SHA1 Entrust CA
+
+duo_unix-1.9.14:
+
+- Added SELinux policy module
+- Improve poll(2) error handling
+
+duo_unix-1.9.13:
+
+- Bugfixes for signal handling
+
+duo_unix-1.9.12:
+
+- Include https_timeout configuration parameter
+- IPv6 support on systems that have getaddrinfo
+
+duo_unix-1.9.11:
+
+- Improve compatibility with FreeBSD 10.
+
+duo_unix-1.9.10:
+
+- Use the correct timeout when polling.
+
+duo_unix-1.9.9:
+
+- Use poll(2) instead of select(2) for timeouts to support busy
+  systems with many open file descriptors.
+- Send User-Agent header with each request.
+
+duo_unix-1.9.8:
+
+- Improve support for SHA2 in HTTPS.
+
+duo_unix-1.9.7:
+
+- Allow using accept_env_factor with SSH.
+- Allow using autopush with PAM on Mac OS X.
+
+duo_unix-1.9.6:
+
+- Update HTTPS CA certificates.
+
+duo_unix-1.9.5:
+
+- Fix issues running 'make check'
+
+- Remove accept_env_factor from pam_duo manpage, as it will not work
+
+duo_unix-1.9.4:
+
+- Send codes / push requests using $DUO_PASSCODE environment variable
+
+- Fix error in 1.9.3 changelog :)
+
+- pam_duo is feature-par with login_duo (autopush, prompts)
+
+- Internal refactoring
+
+- Configuration option for falling back to the local IP if the client
+  IP cannot be detected.
+
+duo_unix-1.9.3:
+
+- Autopush is more user friendly
+
+- Add prompts option to the config file
+
+- Various build and test fixups
+
+duo_unix-1.9.2:
+
+- Restore compatability with Mac OS X <= 10.6
+
+duo_unix-1.9.1:
+
+- Add motd option to the config file
+
+- Add autopush option to the config file
+
+duo_unix-1.9:
+
+- Add multilib support to auto-detect lib/lib64 libdirs
+
+- Added http_proxy option to the config file
+
+- Various build fixups
+
+- Documentation cleanups
+
+duo_unix-1.8:
+
+- Fixed authenticated HTTP_PROXY support
+
+- Better handling of HTTP response status codes
+
+- Include server IP address in pushinfo
+
+duo_unix-1.7:
+
+- Replaced libcurl (and its problematic axTLS, GnuTLS, NSS, polarssl,
+  Cyassl, etc. dependencies) with a minimal OpenSSL-based libhttps
+
+- Replaced 'minuid' config option with more flexible 'groups' matching
+
+- Added automated tests using cram.py for "make {dist}check"
+
+- Added 'cafile' configuration option to override CA cert for testing
+
+- Added login_duo -h option to specify remote host manually
+
+- Added duo_unix.spec from S. Zachariah Sprackett <zac@sprackett.com>
+
+- Fixed issue #5: add implicit 'safe' failmode for local config errors
+
+- Title-cased "Command" in pushinfo
+
+duo_unix-1.6:
+
+- Added 'pushinfo' configuration option
+
+- Fixed Duo enrollment on FreeBSD
+
+- Pedantic GPL + OpenSSL license handling
+
+duo_unix-1.5:
+
+- Changed 'noconn' (allow, deny) option in login_duo and pam_duo to
+  the clearer 'failmode' (safe, secure), e.g.
+  http://en.wikipedia.org/wiki/Fail-safe
+
+- Fixed curl_easy_setopt() of User-Agent for libcurl < 7.17.0
+
+- Added CHANGES :-)
+
